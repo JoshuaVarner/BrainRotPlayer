@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brainrot YouTube Player</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 50px auto;
+      text-align: center;
+    }
+
+    input[type="text"] {
+      width: 70%;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Brainrot YouTube Player</h1>
+    <input type="text" id="videoUrl" placeholder="Enter YouTube URL">
+    <button onclick="playVideo()">Play</button>
+    <div id="player"></div>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/7ghSziUQnhs?si=vL6xbid8895zqPC2&amp;controls=0&amp;start=82&amp;autoplay=1&amp;mute=1&amp;loop=1&amp;playback_rate=2" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+  </div>
+
+  <script>
+    function playVideo() {
+      var videoUrl = document.getElementById('videoUrl').value;
+      var videoId = getYoutubeVideoId(videoUrl);
+      if (videoId) {
+        var playerDiv = document.getElementById('player');
+        playerDiv.innerHTML = '<iframe width="560" height="315" src="https://www.youtube.com/embed/' + videoId + '" frameborder="0" allowfullscreen></iframe>';
+      } else {
+        alert('Please enter a valid YouTube URL.');
+      }
+    }
+
+    function getYoutubeVideoId(url) {
+      var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+      var match = url.match(regExp);
+      if (match && match[2].length === 11) {
+        return match[2];
+      } else {
+        return null;
+      }
+    }
+  </script>
+</body>
+</html>
